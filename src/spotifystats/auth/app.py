@@ -2,7 +2,7 @@ import os
 from flask import Flask, redirect, request, jsonify, session, url_for
 from flask_cors import CORS
 from spotipy.oauth2 import SpotifyOAuth
-from spotipy.cache_handler import CacheFileHandler
+from spotifystats.auth import NoCacheHandler
 from spotifystats.core.util import check_env
 
 # Check that all required environment variables are set
@@ -22,7 +22,8 @@ app = Flask(__name__)
 CORS(app)
 
 spotify_auth = SpotifyOAuth(
-    scope = ["user-read-recently-played"]
+    scope = ["user-read-recently-played", "user-top-read"],
+    cache_handler = NoCacheHandler(),
 )
 
 @app.route("/login")
@@ -36,7 +37,13 @@ def callback():
     """Callback for Spotify login."""
     code = request.args.get("code")
     token = spotify_auth.get_access_token(code)
+    return jsonify(token)
 
+@app.route("/login/refresh")
+def refresh():
+    """Refresh access token."""
+    refresh_token = request.args.get("refresh_token")
+    token = spotify_auth.refresh_access_token(refresh_token)
     return jsonify(token)
 
 if __name__ == "__main__":
