@@ -7,9 +7,6 @@ from spotifystats.core.util import check_env
 # Check that all required environment variables are set
 env_list = ["SPOTIPY_CLIENT_ID", "SPOTIPY_CLIENT_SECRET", "SPOTIPY_REDIRECT_URI"]
 
-#! DEBUG ONLY
-from dotenv import load_dotenv  # noqa
-
 load_dotenv()
 
 check_env(env_list)

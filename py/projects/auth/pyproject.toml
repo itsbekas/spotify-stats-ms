@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "auth"
+version = "0.1.0"
+description = ""
+authors = ["Bernardo Jordão <bernardo.jordao@tecnico.ulisboa.pt>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+spotipy = "^2.23.0"
+flask = "^3.0.0"
+flask-cors = "^4.0.0"
+
+[tool.poetry.scripts]
+auth = 'app:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
