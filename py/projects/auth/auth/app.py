@@ -1,15 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from spotipy.oauth2 import SpotifyOAuth
-from spotifystats.auth import NoCacheHandler
-from spotifystats.core.util import check_env
+from .no_cache_handler import NoCacheHandler
+# from spotifystats.core.util import check_env
 
 # Check that all required environment variables are set
 env_list = ["SPOTIPY_CLIENT_ID", "SPOTIPY_CLIENT_SECRET", "SPOTIPY_REDIRECT_URI"]
 
-load_dotenv()
-
-check_env(env_list)
+# check_env(env_list)
 
 app = Flask(__name__)
 CORS(app)

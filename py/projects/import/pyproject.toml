@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "import"
+version = "0.1.0"
+description = ""
+authors = ["Bernardo Jordão <bernardo.jordao@tecnico.ulisboa.pt>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = "^2.0.23"
+flask = "^3.0.0"
+flask-cors = "^4.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

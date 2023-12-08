@@ -1,13 +1,27 @@
-version: '3'
+version: '3.8'
 
 services:
-  auth:
-    build: ./py/projects/auth/
+  auth-dev:
+    build:
+      context: py/
+      dockerfile: Dockerfile.poetry
+      target: development
+      args:
+        PROJECT_DIR: projects/auth
     ports:
-      - "5001:5000"
-  
-  # import:
-  #   build: ./py/projects/import
-  #   ports:
-  #     - "5002:5000"
-
+      - 5001:5000
+    volumes:
+      - ./py/projects/auth/auth:/app
+    env_file:
+      - ./py/projects/auth/.env
+  import-dev:
+    build:
+      context: py/
+      dockerfile: Dockerfile.poetry
+      target: development
+      args:
+        PROJECT_DIR: projects/import
+    ports:
+      - 5002:5000
+    volumes:
+      - ./py/projects/import/import:/app
