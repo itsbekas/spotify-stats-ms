@@ -12,14 +12,16 @@ services:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
   # Backend
-  auth-dev:
+  auth-dev: # Flask
     build:
       context: py/
       dockerfile: Dockerfile.poetry
       target: development
       args:
         PROJECT_DIR: projects/auth
+    stop_signal: SIGINT
     ports:
       - 5001:5000
     volumes:
@@ -30,13 +32,15 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.auth.rule=Host(`localhost`)"
       - "traefik.http.routers.auth.rule=PathPrefix(`/login`)"
-  import-dev:
+
+  import-dev: # Flask
     build:
       context: py/
       dockerfile: Dockerfile.poetry
       target: development
       args:
         PROJECT_DIR: projects/import
+    stop_signal: SIGINT
     ports:
       - 5002:5000
     volumes:
